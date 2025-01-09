@@ -13,5 +13,24 @@ with open('recipes.txt', 'r', encoding='utf-8') as file:
         file.readline()
         cook_book[name_ingred] = ingredients
 
-pprint(cook_book)
+# Задача вторая
+def get_shop_list_by_dishes(dishes: list, person_count: int):
+    result = {}  # создаем список где будет вывод условия задачи
+    for dish in dishes:   #  проходим циклом по каждому значению в списке
+        if dish in cook_book:   # проверям есть ли значение в словаре
+            for i in cook_book[dish]:   #(если есть) проходим циклом по всем встречающимся в словаре с этим значениям
+                if i['ingredient_name'] in result:  # если есть в словаре result
+                    result[i['ingredient_name']]['quantity'] += int(i['quantity']) * person_count
+                else:
+                    result[i['ingredient_name']] = {'measure': i['measure'],'quantity': int(i['quantity']) * person_count}   #
+        else:
+            print('нет такого блюда')
+    pprint(result)
+
+
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+
+
+
+
 
